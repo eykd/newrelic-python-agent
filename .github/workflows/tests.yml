@@ -36,14 +36,35 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
+    - name: Cache Tox and Pip (Linux)
+      if: startsWith(runner.os, 'Linux')
+      uses: actions/cache@v2
+      with:
+        path: |
+          **/.tox
+          ~/.cache/pip
+        key: ${{ runner.os }}-${{ matrix.python-version }}-${{ matrix.test-directory }}-${{ hashFiles('tests/base_requirements.txt,./tox.ini,tests/${{ matrix.test-directory }}/tox.ini') }}
+
+    - name: Cache Tox and Pip (Windows)
+      if: startsWith(runner.os, 'Windows')
+      uses: actions/cache@v2
+      with:
+        path: |
+          **/.tox
+          ~\AppData\Local\pip\Cache
+        key: ${{ runner.os }}-${{ matrix.python-version }}-${{ matrix.test-directory }}-${{ hashFiles('tests/base_requirements.txt,./tox.ini,tests/${{ matrix.test-directory }}/tox.ini') }}
+
     - uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
         architecture: x64
+
     - name: Install Dependencies
       run: |
         pip install -U pip
         pip install -U wheel setuptools tox virtualenv!=20.0.24
+
     - name: Test
       run: |
         py_version=$(echo ${{ matrix.python-version }} | tr -d "." | sed 's/pypy2/pypy/')
