@@ -29,8 +29,8 @@ jobs:
 
     strategy:
       matrix:
-        python-version: [2.7, 3.5, 3.6, 3.7, 3.8, 3.9, pypy2, pypy3]
-        test-directory: [agent_features, agent_streaming, agent_unittests]
+        python-version: [3.7]
+        test-directory: [agent_unittests]
 
     runs-on: ubuntu-latest
 
