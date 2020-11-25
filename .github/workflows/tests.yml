@@ -44,7 +44,7 @@ jobs:
         path: |
           **/.tox
           ~/.cache/pip
-        key: ${{ runner.os }}-${{ matrix.python-version }}-${{ matrix.test-directory }}-${{ hashFiles('tests/base_requirements.txt', './tox.ini', 'tests/${{ matrix.test-directory }}/tox.ini') }}
+        key: ${{ runner.os }}-${{ matrix.python-version }}-${{ matrix.test-directory }}-${{ hashFiles('tests/${{ matrix.test-directory }}/tox.ini', './tox.ini', 'tests/base_requirements.txt') }}
 
     - name: Cache Tox and Pip (Windows)
       if: startsWith(runner.os, 'Windows')
@@ -53,7 +53,7 @@ jobs:
         path: |
           **/.tox
           ~\AppData\Local\pip\Cache
-        key: ${{ runner.os }}-${{ matrix.python-version }}-${{ matrix.test-directory }}-${{ hashFiles('tests/base_requirements.txt', './tox.ini', 'tests/${{ matrix.test-directory }}/tox.ini') }}
+        key: ${{ runner.os }}-${{ matrix.python-version }}-${{ matrix.test-directory }}-${{ hashFiles('tests/${{ matrix.test-directory }}/tox.ini', './tox.ini', 'tests/base_requirements.txt') }}
 
     - uses: actions/setup-python@v2
       with:
