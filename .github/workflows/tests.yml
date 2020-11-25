@@ -68,7 +68,7 @@ jobs:
     - name: Test
       run: |
         py_version=$(echo ${{ matrix.python-version }} | tr -d "." | sed 's/pypy2/pypy/')
-        toxenvs=$(tox -c tests/${{ matrix.test-directory }}/tox.ini -l | grep ${py_version}- | xargs echo | tr " " ",")
+        toxenvs=$(tox -c tests/${{ matrix.test-directory }}/tox.ini -l | grep ${py_version} | xargs echo | tr " " ",")
         [ -z $toxenvs ] && exit 0
         tox -vv -p auto -c tests/${{ matrix.test-directory }}/tox.ini -e $toxenvs
       env:
