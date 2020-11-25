@@ -30,7 +30,7 @@ jobs:
     strategy:
       matrix:
         python-version: [3.7]
-        test-directory: [agent_unittests]
+        test-directory: [agent_unittests, framework_starlette]
 
     runs-on: ubuntu-latest
 
